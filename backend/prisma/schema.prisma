@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model BahanMentah {
+  id                   Int                    @id @default(autoincrement())
+  nama                 String
+  stok                 Int                    @default(0)
+  TransaksiBahanMentah TransaksiBahanMentah[]
+}
+
+model BahanJadi {
+  id                 Int                  @id @default(autoincrement())
+  nama               String
+  stok               Int                  @default(0)
+  size               String
+  TransaksiBahanJadi TransaksiBahanJadi[]
+}
+
+model Client {
+  id                   Int                    @id @default(autoincrement())
+  nama                 String
+  alamat               String?
+  no_hp                String?
+  kategori             Kategori
+  TransaksiBahanMentah TransaksiBahanMentah[]
+  TransaksiBahanJadi   TransaksiBahanJadi[]
+}
+
+model TransaksiBahanMentah {
+  id                Int      @id @default(autoincrement())
+  id_bahan_mentah   Int
+  jumlah            Int
+  tanggal_transaksi DateTime
+  status            Status
+  id_client         Int?
+  keterangan        String?
+
+  bahanMentah BahanMentah @relation(fields: [id_bahan_mentah], references: [id])
+  client      Client?     @relation(fields: [id_client], references: [id])
+}
+
+model TransaksiBahanJadi {
+  id                Int      @id @default(autoincrement())
+  id_bahan_jadi     Int
+  jumlah            Int
+  tanggal_transaksi DateTime
+  status            Status
+  id_client         Int?
+  keterangan        String?
+
+  bahanJadi BahanJadi @relation(fields: [id_bahan_jadi], references: [id])
+  client    Client?   @relation(fields: [id_client], references: [id])
+}
+
+model Alat {
+  id            Int             @id @default(autoincrement())
+  nama          String
+  jumlah        Int             @default(0)
+  used          Int             @default(0)
+  unused        Int             @default(0)
+  rusak         Int             @default(0)
+  TransaksiAlat TransaksiAlat[]
+}
+
+model TransaksiAlat {
+  id                Int      @id @default(autoincrement())
+  id_alat           Int
+  jumlah            Int
+  status            Status
+  tanggal_transaksi DateTime
+  keterangan        String?
+
+  alat Alat @relation(fields: [id_alat], references: [id])
+}
+
+enum Status {
+  masuk
+  keluar
+}
+
+enum Kategori {
+  produsen
+  cabang
+  lainnya
+}
