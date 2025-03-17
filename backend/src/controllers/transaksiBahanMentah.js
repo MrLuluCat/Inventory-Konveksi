@@ -100,7 +100,7 @@ exports.deleteTransaksiBahanMentah = async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.transaksiBahanMentah.delete({ where: { id: Number(id) } });
-    res.json({ message: "Transaksi berhasil dihapus" });
+    res.json({ message: "Transaksi Bahan Mentah berhasil dihapus" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

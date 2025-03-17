@@ -1,3 +1,40 @@
-node_modules
 # Keep environment variables out of version control
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Prisma migration and database (only ignore the database file, NOT migrations)
+prisma/dev.db
+prisma/dev.db-journal
+
+# Environment variables
 .env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+debug.log
+out.log
+
+# Ignore build files
+dist/
+build/
+
+# Ignore editor & system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

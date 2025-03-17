@@ -1,0 +1,376 @@
+openapi: 3.0.0
+info:
+  title: API Documentation - Backend Project
+  description: Documentation for the backend system built with ExpressJS.
+  version: 1.0.0
+paths:
+  /bahan-mentah:
+    get:
+      summary: Retrieve all raw materials
+      responses:
+        200:
+          description: A list of raw materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    quantity:
+                      type: integer
+    post:
+      summary: Add a new raw material
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                quantity:
+                  type: integer
+      responses:
+        201:
+          description: Raw material created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  quantity:
+                    type: integer
+
+  /bahan-jadi:
+    get:
+      summary: Retrieve all finished products
+      responses:
+        200:
+          description: A list of finished products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    stock:
+                      type: integer
+    post:
+      summary: Add a new finished product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                stock:
+                  type: integer
+      responses:
+        201:
+          description: Finished product created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  stock:
+                    type: integer
+
+  /klien:
+    get:
+      summary: Retrieve all clients
+      responses:
+        200:
+          description: A list of clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    post:
+      summary: Add a new client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        201:
+          description: Client created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+
+  /transaksi-mentah:
+    get:
+      summary: Retrieve all raw material transactions
+      responses:
+        200:
+          description: A list of raw material transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    transaction_date:
+                      type: string
+                      format: date
+                    amount:
+                      type: integer
+    post:
+      summary: Create a new raw material transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_date:
+                  type: string
+                  format: date
+                amount:
+                  type: integer
+      responses:
+        201:
+          description: Raw material transaction created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  transaction_date:
+                    type: string
+                    format: date
+                  amount:
+                    type: integer
+
+  /transaksi-jadi:
+    get:
+      summary: Retrieve all finished product transactions
+      responses:
+        200:
+          description: A list of finished product transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    transaction_date:
+                      type: string
+                      format: date
+                    amount:
+                      type: integer
+    post:
+      summary: Create a new finished product transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_date:
+                  type: string
+                  format: date
+                amount:
+                  type: integer
+      responses:
+        201:
+          description: Finished product transaction created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  transaction_date:
+                    type: string
+                    format: date
+                  amount:
+                    type: integer
+
+  /alat:
+    get:
+      summary: Retrieve all tools
+      responses:
+        200:
+          description: A list of tools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    post:
+      summary: Add a new tool
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        201:
+          description: Tool created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+
+  /transaksi-alat:
+    get:
+      summary: Retrieve all tool transactions
+      responses:
+        200:
+          description: A list of tool transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    transaction_date:
+                      type: string
+                      format: date
+                    amount:
+                      type: integer
+    post:
+      summary: Create a new tool transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_date:
+                  type: string
+                  format: date
+                amount:
+                  type: integer
+      responses:
+        201:
+          description: Tool transaction created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  transaction_date:
+                    type: string
+                    format: date
+                  amount:
+                    type: integer
+
+components:
+  schemas:
+    RawMaterial:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity:
+          type: integer
+    FinishedProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        stock:
+          type: integer
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Tool:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        transaction_date:
+          type: string
+          format: date
+        amount:
+          type: integer
